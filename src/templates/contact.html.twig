@@ -1,0 +1,30 @@
+{% include 'header.html.twig' %}
+<div class="row content">
+    <div class="col-md-4 col-centered">
+        <form id="contactme" method="post" enctype="multipart/form-data">
+            <label>
+                Your Name:
+                <input class="form-control" type="text" name="name" placeholder="Name">
+            </label><br>
+            <label>
+                Your email:
+                <input class="form-control" type="email" name="email" placeholder="Example@example.com">
+            </label><br>
+            <label>
+                Subject:
+                <input class="form-control" type="text" name="subject" placeholder="Subject">
+            </label><br>
+            <label>
+                Message:<br>
+                <textarea class="form-control" rows="10" cols="50" name="message">
+
+                    </textarea>
+            </label><br>
+            <div class="g-recaptcha" data-sitekey="6LfCsScTAAAAADf34d6xWy3NrvbyrF5XdYsWNh7B"></div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <p class="response"></p>
+    </div>
+</div>
+<script src="assets/js/mail.js"></script>
+{% include 'footer.html.twig' %}

@@ -13,14 +13,14 @@ require_once "vendor/autoload.php";
 
 // Create a simple "default" Doctrine ORM configuration for Annotations
 $isDevMode = true;
-$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src/domain"), $isDevMode);
+$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src/domain"), $isDevMode);
 
 // database configuration parameters
 $conn = array(
     'driver'   => 'pdo_mysql',
     'user'     => 'root',
-    'password' => '',
-    'dbname'   => 'doctrine-iris',
+    'password' => '9cnHadtZTjoGtzUPY8ge',
+    'dbname'   => 'IVC-v2',
 );
 
 // obtaining the entity manager

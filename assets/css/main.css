@@ -1,0 +1,265 @@
+body {
+    font-family: Arial;
+    min-width: 460px;
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    color: black;
+    max-width: 420px;
+}
+
+p > a{
+    color:white;
+    font-weight: 600;
+}
+p > a:visited{
+    color:white;
+}
+p > a:hover{
+    color:black;
+}
+a:visited{
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.titlebar {
+    margin-top: 30px;
+    padding-left: 60px;
+    height: 100px;
+}
+
+.custom-nav {
+    padding-left: 95px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.custom-nav ul {
+    list-style-type: none;
+    margin: 0;
+}
+
+.custom-nav li {
+    float: left;
+}
+
+.custom-nav li a {
+    display: block;
+    width: 120px;
+}
+
+.content {
+    background-color: #37B6CE;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.footer {
+    margin-top: 30px;
+    padding-left: 40px;
+    float: left;
+}
+
+#logo {
+    float: left;
+}
+
+#logo-text {
+    font-weight: bold;
+    font-size: 30pt;
+    margin: 0;
+}
+
+#logo-text-2 {
+    font-weight: bold;
+    font-size: 15pt;
+    margin: 0;
+}
+
+.content-text {
+    color: white;
+    font-size: 13pt;
+    margin: 20px;
+    margin-left: 25px;
+    margin-right: 0;
+    padding-right: 50px;
+}
+
+.content-image {
+    margin-left: 15px;
+}
+
+.content-image img {
+    width: 100%;
+    min-width: 200px;
+    max-width: 400px;
+}
+
+.footer-link {
+    display: inline;
+}
+
+.nav-link-hover:hover {
+    font-weight: bold;
+}
+
+.nav-link-hover p {
+    font-size: 100%;
+    padding-left: 20px;
+}
+#conceptArt{
+    padding-right: 50px;
+}
+#makeUp{
+    padding-left: 50px;
+}
+
+.currentNAV {
+    font-weight: bold;
+}
+
+.work-content {
+    background-color: #111111;
+    height: 400px;
+}
+
+#mywork {
+    position: relative;
+    padding-left: 40%;
+    top: 45%;
+    font-weight: bold;
+    font-size: 20pt;
+    height: inherit;
+    vertical-align: middle;
+    color: white;
+    overflow: auto;
+}
+
+.custom-nav-work {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 22pt;
+}
+
+.custom-nav-work ul {
+    padding-left: 0;
+    display: inline-block;
+    list-style-type: none;
+    text-align: center;
+}
+
+.custom-nav-work li {
+    float: left;
+}
+
+.custom-nav-work li a {
+    width: 250px;
+}
+
+#contactme {
+    margin-left: 20px;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.gallery-content {
+    padding-left: 20px;
+}
+
+.galleryimg {
+    max-height: 150px;
+    width: auto;
+}
+
+.cb-label {
+    margin-left: 20px;
+}
+
+.img-container {
+    min-width: 210px;
+    margin-bottom: 50px;
+}
+
+.editmode-btn {
+    z-index: 1;
+    position: absolute;
+    left: 43%;
+    top: 25%;
+}
+
+.spotlight-div {
+    display: block;
+    top: 25%;
+    width: 100%;
+    margin: auto;
+}
+
+figure {
+    text-align: center;
+    width: inherit;
+}
+
+.spotlight-image {
+    -webkit-filter: blur(3px);
+    filter: blur(3px);
+    transform: scale(1);
+    z-index: 3;
+    transition: 0.5s all ease-in-out;
+    width: auto;
+    max-height: 200px;
+}
+
+.spotlight-image:hover {
+    cursor: pointer;
+}
+
+#spotlight-center {
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.spotlight-selected {
+    -webkit-filter: blur(0px);
+    filter: blur(0px);
+    transform: scale(1.8);
+    z-index: 1;
+}
+
+@media all and (max-width: 950px) {
+    .side-spotlight {
+        display: none;
+    }
+    #spotlight-center {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .custom-nav-work {
+        margin: 0px;
+    }
+    .custom-nav-work li {
+        width: 100%;
+    }
+    .custom-nav-work li a {
+        width: 100%;
+        float: right;
+    }
+    #conceptArt{
+        padding-right: 0;
+    }
+    #makeUp{
+        padding-left: 0;
+    }
+}

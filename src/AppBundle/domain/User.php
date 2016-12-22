@@ -6,8 +6,9 @@
  * Date: 22/12/2016
  * Time: 14:40
  */
-namespace domain{
-    /** @Entity @Table(name="tblUser") */
+namespace AppBundle\domain{
+    /** @Entity(repositoryClass="AppBundle\repositories\UserRepository")
+     * @Table(name="tblUser") */
     class User
     {
         /** @Id @Column(type="integer") @GeneratedValue */

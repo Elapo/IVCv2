@@ -6,8 +6,9 @@
  * Date: 22/12/2016
  * Time: 14:25
  */
-namespace domain {
-    /** @Entity @Table(name="tblArt") */
+namespace AppBundle\domain {
+    /** @Entity(repositoryClass="AppBundle\repositories\UserRepository")
+     * @Table(name="tblArt") */
     class Art
     {
         /** @Id @Column(type="integer") @GeneratedValue */

@@ -1,0 +1,22 @@
+{% include 'header.html.twig' %}
+<script src="assets/js/spotlight.js"></script>
+<div class="row work-content">
+    <div class="col-centered col-md-12 spotlight-div">
+        <figure>
+            <img src="{{ spotlightL }}" alt="spotlight Image" class="spotlight-image side-spotlight" id="spotlight-left">
+            <img src="{{ spotlightC }}" alt="spotlight Image" class="spotlight-image spotlight-selected" id="spotlight-center">
+            <img src="{{ spotlightR }}" alt="spotlight Image" class="spotlight-image side-spotlight" id="spotlight-right">
+        </figure>
+    </div>
+</div>
+<div class="row">
+    <div class="row custom-nav-work">
+        <ul>
+            <li id="conceptArt"><a class="nav-link-hover" href="./gallery/concept">Concept Art</a></li>
+            <li><a class="nav-link-hover" href="./gallery/illustration">Illustrations</a></li>
+            <li id="makeUp"><a class="nav-link-hover" href="./gallery/makeup">Make-Up Art</a></li>
+        </ul>
+    </div>
+</div>
+<script src="assets/js/spotlight.js"></script>
+{% include 'footer.html.twig' %}

@@ -14,7 +14,11 @@
         }
     ],
     "autoload":{
-        "psr-4":{"domain\\":"src/domain/"}
+        "psr-4":{
+            "AppBundle\\":"src/AppBundle/",
+            "domain\\":"src/AppBundle/domain/",
+            "services\\":"src/AppBundle/services/"
+        }
     }
 
 }

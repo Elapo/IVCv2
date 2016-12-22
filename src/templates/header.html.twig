@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Home pagina">
+    <meta name="keywords" content="biografie, gallery, contact">
+    <meta name="viewport" content="width=device-width">
+    <title>Iris VC - {{ pageTitle }}</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css?v=<?=time();?>">
+    <link rel="icon" href="assets/img/logoivc.png">
+    <script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+    {% if contact %}
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+    {% endif %}
+</head>
+<body>
+<div class="row">
+    <div class="col-md-12 titlebar">
+    <a href="./">
+    <img id="logo" src="assets/img/logoivc.png" alt="Logo" width= "72" height="65">
+    <h1 id="logo-text">Iris Verbert-Caes</h1>
+<h2 id="logo-text-2">Graphic designer / Illustrator</h2>
+</a>
+</div>
+</div>
+<div class="row custom-nav">
+    <ul>
+    <li><a class="nav-link-hover" href="./work">My Work</a></li>
+<li><a class="nav-link-hover" href="./contact">Contact Me</a></li>
+        {#TODO: check session and admin#}
+        {% if admin %}
+            <li><a class="nav-link-hover" href="uploadform.php">Upload</a></li>
+            <li><a class="nav-link-hover" href="includes/logout.php">Logout</a></li>
+        {% endif %}
+</ul>
+</div>

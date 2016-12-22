@@ -10,7 +10,17 @@ use \domain\Category;
 
 require_once "bootstrap.php";
 
-$art = new Art("Link", "desc", false, false, new Category("Cat"));
+$cats = array(
+    new Category("Illustration"),
+    new Category("Makeup"),
+    new Category("Concept")
+);
 
-$entityManager->persist($art);
+foreach ($cats as $c){
+    $entityManager->persist($c);
+}
+
+$user = new \domain\User("irisVC", "iris.verbert@gmail.com","iFMXVbI3KL");
+$entityManager->persist($user);
+
 $entityManager->flush();
