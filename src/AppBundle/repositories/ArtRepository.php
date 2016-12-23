@@ -23,7 +23,7 @@ namespace AppBundle\repositories {
 
         function getArtById($id)
         {
-            return $this->getEntityManager()->find('\domain\Art', $id);
+            return $this->_em->find('AppBundle\domain\Art', $id);
         }
 
         function getArtByCategory($cat)

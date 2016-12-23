@@ -19,6 +19,11 @@ $securityService = new AppBundle\services\SecurityService();
 $APIHelper = new AppBundle\services\APIHelper();
 $mailService = new AppBundle\services\MailService();
 
+/**
+ * For future reference: if an error claiming classes are redeclared is thrown, the classes are loaded twice in composer's
+ * autoloader. e.g.: I used to load domain, repos and services separately, which isn't required. only AppBundle needs to be
+ * loaded.
+ */
 $artRepo = $entityManager->getRepository('AppBundle\domain\Art');
 $userRepo = $entityManager->getRepository('AppBundle\domain\User');
 
@@ -81,10 +86,6 @@ $app->post('/contact', function (req $req, resp $resp) use ($mailService){
         return $response = $resp->withStatus(400);
 
     return $resp->getBody()->write(json_encode($mailService->send($data['email'], $data['name'], $data['message'], $data['subject'], $data['g-recaptcha-response'])));
-});
-
-$app->get('/test', function (req $req, resp $resp) use ($userRepo, $artRepo){
-    return $resp->getBody()->write(print_r($userRepo->find(1)));
 });
 
 $app->run();

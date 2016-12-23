@@ -11,7 +11,7 @@ namespace AppBundle\repositories {
     {
         public function getUser()
         {
-            return $this->getEntityManager()->find('\domain\user', 1);
+            return $this->getEntityManager()->find('AppBundle\domain\user', 1);
         }
     }
 }

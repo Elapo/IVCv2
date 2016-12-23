@@ -7,7 +7,7 @@
  * Time: 14:25
  */
 namespace AppBundle\domain {
-    /** @Entity(repositoryClass="AppBundle\repositories\UserRepository")
+    /** @Entity(repositoryClass="AppBundle\repositories\ArtRepository")
      * @Table(name="tblArt") */
     class Art
     {
