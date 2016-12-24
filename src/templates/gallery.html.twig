@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="assets/css/gallery.css">
+<script src="https://rubaxa.github.io/Sortable/Sortable.js"></script>
+<script>
+    var imgs = <?=json_encode($files); ?>;
+    var desc = <?=json_encode($desc); ?>;
+</script>
+<?php
+    if($admin) echo '<script src="assets/js/editmode.js"></script>'?>
+<div class="container-fluid overlay">
+    <div class="gallery-showcase">
+    <img src="assets/img/arrow.png" alt="arrow" class="arrow-left arrow" height="50">
+    <div class="gallery-selected">
+    <div class="gallery-selected-img"></div>
+    <p id="artdesc"></p>
+    </div>
+    <img src="assets/img/arrow.png" alt="arrow" class="arrow-right arrow" height="50">
+    </div>
+    </div>
+    <div class="row content gallery-content list-group" id="imageList">
+<?php
+    $i = -1;
+foreach ($data as $image){
+    $i++;
+    if($image['isVideo']==0){
+        echo '<div class="col-sm-12 col-md-6 col-lg-3 draggable fixedheight">
+        <div class="img-container">
+            <figure>
+            <img class="galleryimg ghost" src="'."assets/thumb/".substr($image['ImgLink'], 11).'" alt="image" value="'.$i.'">
+            </figure>';
+    }
+    else{
+        echo '<div class="col-sm-12 col-md-6 col-lg-3 draggable fixedheight">
+        <div class="img-container">
+            <figure>
+            <img class="galleryimg ghost" src="https://img.youtube.com/vi/'.$image['ImgLink'].'/hqdefault.jpg" alt="image" value="'.$i.'">
+            </figure>';
+    }
+    if($admin){
+        echo '<div class="btn-group-vertical editmode-btn hidden">
+        <button class="btn btn-success editimg" value="'.$image['PK_ArtID'].'">Edit</button>
+            <button  class="btn btn-danger deleteimg" value="'.$image['PK_ArtID'].'">Delete</button>
+            </div>';
+    }
+    echo'</div></div>';
+}
+    ?>
+</div>
+
+<?php if($admin){
+    echo '
+    <script>
+    Sortable.create(imageList,{animation:150, draggable:".draggable", ghostClass:".ghost"});
+</script>
+<div class="row">
+    <div class="checkbox col-md-12">
+        <label class="cb-label"><input type="checkbox" id="editmode">Edit mode</label>
+    </div>
+</div>';
+//todo: fix editmode for videos
+}?>
+<script src="assets/js/gallery.js"></script>
+<?php
+include("includes/templates/footer.php"); ?>

@@ -5,8 +5,7 @@
  * Date: 22/12/2016
  * Time: 15:49
  */
-use \domain\Art;
-use \domain\Category;
+use AppBundle\domain\Category;
 
 require_once "bootstrap.php";
 
@@ -20,7 +19,7 @@ foreach ($cats as $c){
     $entityManager->persist($c);
 }
 
-$user = new \domain\User("irisVC", "iris.verbert@gmail.com","iFMXVbI3KL");
+$user = new AppBundle\domain\User("irisVC", "iris.verbert@gmail.com","iFMXVbI3KL");
 $entityManager->persist($user);
 
 $entityManager->flush();

@@ -1,6 +1,9 @@
 {% include 'header.html.twig' %}
 <div class="row content">
-    <div class="col-md-4 col-centered">
+    <div class="col-md-6 col-sm-12 col-lg-4 col-centered">
+        <div class="alert alert-success emailsuccess hidden">
+
+        </div>
         <form id="contactme" method="post" enctype="multipart/form-data">
             <label>
                 Your Name:
@@ -16,9 +19,7 @@
             </label><br>
             <label>
                 Message:<br>
-                <textarea class="form-control" rows="10" cols="50" name="message">
-
-                    </textarea>
+                <textarea class="form-control" rows="10" cols="50" name="message"></textarea>
             </label><br>
             <div class="g-recaptcha" data-sitekey="6LfCsScTAAAAADf34d6xWy3NrvbyrF5XdYsWNh7B"></div>
             <button type="submit" class="btn btn-default">Submit</button>
