@@ -1,5 +1,4 @@
 {% include 'header.html.twig' %}
-<script src="assets/js/spotlight.js"></script>
 <div class="row work-content">
     <div class="col-centered col-md-12 spotlight-div">
         <figure>
@@ -12,11 +11,11 @@
 <div class="row">
     <div class="row custom-nav-work">
         <ul>
-            <li id="conceptArt"><a class="nav-link-hover" href="./gallery/concept">Concept Art</a></li>
-            <li><a class="nav-link-hover" href="./gallery/illustration">Illustrations</a></li>
-            <li id="makeUp"><a class="nav-link-hover" href="./gallery/makeup">Make-Up Art</a></li>
+            <li id="conceptArt"><a class="nav-link-hover" href="{{ base_url }}gallery/concept">Concept Art</a></li>
+            <li><a class="nav-link-hover" href="{{ base_url }}gallery/illustration">Illustrations</a></li>
+            <li id="makeUp"><a class="nav-link-hover" href="{{ base_url }}gallery/makeup">Make-Up Art</a></li>
         </ul>
     </div>
 </div>
-<script src="assets/js/spotlight.js"></script>
+<script src="{{ base_url }}assets/js/spotlight.js"></script>
 {% include 'footer.html.twig' %}

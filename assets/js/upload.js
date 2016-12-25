@@ -4,7 +4,7 @@ $(document).ready(function () {
     upload.submit(function (e) {
         e.preventDefault();
         ajaxRequest = $.ajax({
-            url:'includes/upload.php',
+            url:'./upload',
             type: 'POST',
             cache:false,
             contentType:false,

@@ -2,22 +2,22 @@
 <div class="row content">
     <div class="col-md-6 col-centered">
         <form id="imgupload" method="post" enctype="multipart/form-data">
-            <input type="file" name="imupload" id="imupload" style="width: 100%">
+            <div class="uploadThis">
+                <input type="file" name="imupload" id="imupload" style="width: 100%">
+                <br>
+                <label>Beschrijving:
+                    <textarea class="form-control" name="desc" rows="5" cols="50"></textarea>
+                </label><br>
+                <label>Categorie:
+                    <select name="cat">
+                        {% for cat in categories %}
+                            <option value='{{ cat.getName }}'>{{ cat.getName }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+            </div>
             <br>
-            <label>Beschrijving:
-                <textarea class="form-control" name="desc" rows="5" cols="50"></textarea>
-            </label><br>
-            <label>Categorie:
-                <select name="cat">
-                    {#<?php
-                    foreach ($dropdown as $item)
-                    {
-                        echo "<option value='" . $item['Category'] . "'>" . $item['Category'] . "</option>";
-                    }
-                    ?>#}
-                </select>
-            </label>
-            <br>
+            <button id="addUpload" class="btn btn-default">Add Another</button>
             <input type="submit" value="upload" class="submit btn btn-default">
         </form>
     </div>
@@ -25,7 +25,7 @@
         <img src="" width="500" id="preview" alt="preview">
     </div>
 </div>
-<script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
-<script src="assets/js/upload.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+<script src="{{ base_url }}assets/js/upload.js"></script>
 </body>
 </html>
