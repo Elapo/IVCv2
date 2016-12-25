@@ -1,0 +1,31 @@
+{% include 'header.html.twig' %}
+<div class="row content">
+    <div class="col-md-6 col-centered">
+        <form id="imgupload" method="post" enctype="multipart/form-data">
+            <input type="file" name="imupload" id="imupload" style="width: 100%">
+            <br>
+            <label>Beschrijving:
+                <textarea class="form-control" name="desc" rows="5" cols="50"></textarea>
+            </label><br>
+            <label>Categorie:
+                <select name="cat">
+                    {#<?php
+                    foreach ($dropdown as $item)
+                    {
+                        echo "<option value='" . $item['Category'] . "'>" . $item['Category'] . "</option>";
+                    }
+                    ?>#}
+                </select>
+            </label>
+            <br>
+            <input type="submit" value="upload" class="submit btn btn-default">
+        </form>
+    </div>
+    <div class="col-md-3 col-centered">
+        <img src="" width="500" id="preview" alt="preview">
+    </div>
+</div>
+<script   src="https://code.jquery.com/jquery-3.0.0.min.js"   integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0="   crossorigin="anonymous"></script>
+<script src="assets/js/upload.js"></script>
+</body>
+</html>
