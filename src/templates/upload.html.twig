@@ -2,27 +2,38 @@
 <div class="row content">
     <div class="col-md-6 col-centered">
         <form id="imgupload" method="post" enctype="multipart/form-data">
-            <div class="uploadThis">
-                <input type="file" name="imupload" id="imupload" style="width: 100%">
-                <br>
-                <label>Beschrijving:
-                    <textarea class="form-control" name="desc" rows="5" cols="50"></textarea>
-                </label><br>
-                <label>Categorie:
-                    <select name="cat">
-                        {% for cat in categories %}
-                            <option value='{{ cat.getName }}'>{{ cat.getName }}</option>
-                        {% endfor %}
-                    </select>
-                </label>
-            </div>
+            <ul id="multiform">
+                <li class="uploadThis uploadFormPart list-group-item" id="formPart">
+                    <input type="file" name="imupload" class="imupload inputField" style="width: 100%">
+                    <label class="uploadDesc">Beschrijving:
+                        <textarea class="form-control inputField" name="desc" rows="2" cols="50"></textarea>
+                    </label>
+                    <div class="catDropdown">
+                        <label>Categorie:
+                            <select name="cat" class="inputField">
+                                {% for cat in categories %}
+                                    <option value='{{ cat.getName }}'>{{ cat.getName }}</option>
+                                {% endfor %}
+                            </select>
+                        </label>
+                    </div>
+                    <div class="previewDiv">
+                        <img src="" class="preview" alt="preview">
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="70"
+                             aria-valuemin="0" aria-valuemax="100" style="width:30%">
+                            <span class="sr-only">30% Complete</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
             <br>
-            <button id="addUpload" class="btn btn-default">Add Another</button>
-            <input type="submit" value="upload" class="submit btn btn-default">
+            <div class="uploadButtons">
+                <button id="addUpload" class="btn btn-default">Add Another</button>
+                <input type="submit" value="upload" class="submit btn btn-default">
+            </div>
         </form>
-    </div>
-    <div class="col-md-3 col-centered">
-        <img src="" width="500" id="preview" alt="preview">
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>

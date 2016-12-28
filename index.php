@@ -16,7 +16,7 @@ require "bootstrap.php";
 //init twig
 function base_url(){
     $tech = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
-    return $tech.'://'. $_SERVER['SERVER_NAME'].'/'.'Template/'; //todo: remove template part in prod, clean op all references to assets
+    return $tech.'://'. $_SERVER['SERVER_NAME'].'/'.'ivc/'; //todo: remove template part in prod, clean op all references to assets
 }
 $twigLoader = new Twig_Loader_Filesystem('src/templates/');
 $twig = new Twig_Environment($twigLoader);

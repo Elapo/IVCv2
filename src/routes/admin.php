@@ -37,14 +37,17 @@ $app->group('/admin', function () use ($app, $twig, $artRepo, $catRepo){//todo: 
     });
     $app->post('/upload', function(Request $req, Response $resp) use ($twig, $artRepo){
         $uploadController = new AppBundle\controllers\UploadController($artRepo);
+        $file = $req->getUploadedFiles(); //returns slim-specific thingy
+        //possibly just use $_FILE
         $data = $req->getParsedBody();
-        return $resp->getBody()->write("hi");
+//        $uploadController->saveFile();
+        return $resp->getBody()->write(print_r($file));
     });
 })->add(function(Request $req, Response $resp, $next) use ($securityService){
     if($securityService->checkAdmin()){
         return $resp = $next($req, $resp);
     }
     else{
-        return $response = $resp->withStatus(404);
+        throw new \Slim\Exception\NotFoundException($req, $resp);
     }
 });

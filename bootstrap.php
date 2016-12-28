@@ -19,7 +19,7 @@ $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src/dom
 $conn = array(
     'driver'   => 'pdo_mysql',
     'user'     => 'root',
-    'password' => '9cnHadtZTjoGtzUPY8ge',
+    'password' => '',
     'dbname'   => 'IVC-v2',
 );
 

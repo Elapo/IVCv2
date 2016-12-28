@@ -238,6 +238,41 @@ figure {
     z-index: 1;
 }
 
+#imgupload{
+    margin-left: 20px;
+}
+
+#multiform{
+    padding-right: 60px;
+}
+.uploadFormPart{
+}
+.uploadDesc{
+    width: 40%;
+}
+.catDropdown{
+    display: inline;
+    margin-left: 2%;
+}
+.preview{
+    right: 5px;
+    position: absolute;
+    top: 5px;
+    max-width: 150px;
+    max-height: 100px;
+    height: auto;
+    width: auto;
+    visibility: hidden;
+}
+.progress{
+    display: none;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+.uploadButtons{
+    margin-left: 40px;
+}
+
 @media all and (max-width: 950px) {
     .side-spotlight {
         display: none;
