@@ -38,10 +38,9 @@ $app->group('/admin', function () use ($app, $twig, $artRepo, $catRepo){//todo: 
     $app->post('/upload', function(Request $req, Response $resp) use ($twig, $artRepo){
         $uploadController = new AppBundle\controllers\UploadController($artRepo);
         $file = $req->getUploadedFiles(); //returns slim-specific thingy
-        //possibly just use $_FILE
         $data = $req->getParsedBody();
-//        $uploadController->saveFile();
-        return $resp->getBody()->write(print_r($file));
+        $ret = $uploadController->saveFile($file['img']);
+        return $resp->getBody()->write(json_encode($ret));
     });
 })->add(function(Request $req, Response $resp, $next) use ($securityService){
     if($securityService->checkAdmin()){

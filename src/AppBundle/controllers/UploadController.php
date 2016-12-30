@@ -46,8 +46,15 @@ class UploadController
     }
 
     function saveFile($data){
-        $info = getimagesize($data['img']['tmp_name']); //get info about file
-        $type = $this->checkFileType($data, $info);
+        if(!$data->getError() === UPLOAD_ERR_OK){
+            $return_data['status']=0;
+            $return_data['errmsg']="file upload failed";
+            return $return_data;
+        }
+        $imageFile = $data->file;
+        $info = getimagesize($imageFile); //get info about file
+        print_r($info);
+        $type = $this->checkFileType($imageFile, $info);
         $return_data = array();
 
         if(!$type){
@@ -55,20 +62,20 @@ class UploadController
             $return_data['errmsg']="Wrong file type";
             return $return_data;
         }
-        $ext = pathinfo($data['img']['name'], PATHINFO_EXTENSION);
+        $ext = pathinfo($imageFile, PATHINFO_EXTENSION);
         $filename = "art_img_".uniqid().".".$ext;
         $target = "/assets/art/".$filename;
-        move_uploaded_file($data,$target);
+        move_uploaded_file($imageFile,$target);
 
         switch($type) {
             case IMAGETYPE_GIF:
-                $img = imagecreatefromgif($_FILES['img']['tmp_name']);
+                $img = imagecreatefromgif($imageFile);
                 break;
             case IMAGETYPE_JPEG:
-                $img = imagecreatefromjpeg($_FILES['img']['tmp_name']);
+                $img = imagecreatefromjpeg($imageFile);
                 break;
             case IMAGETYPE_PNG:
-                $img = imagecreatefrompng($_FILES['img']['tmp_name']);
+                $img = imagecreatefrompng($imageFile);
                 break;
             default:
                 $return_data['status']=0;
