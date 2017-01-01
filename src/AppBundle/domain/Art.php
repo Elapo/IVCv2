@@ -29,7 +29,7 @@ namespace AppBundle\domain {
         /** @Column(type="boolean") */
         private $isPromo;
 
-        /** @OneToOne(targetEntity="Category", cascade={"persist"}) */
+        /** @ManyToOne(targetEntity="Category") */
         private $category;
 
 

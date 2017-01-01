@@ -9,6 +9,9 @@
 namespace AppBundle\controllers;
 
 
+use AppBundle\domain\Art;
+use AppBundle\domain\Category;
+
 class UploadController
 {
     private $repo;
@@ -42,49 +45,60 @@ class UploadController
         imagesavealpha($thumb, true);
 
         imagecopyresampled($thumb, $src, 0,0,0,0,$newW, $newH, $width, $height );
-        imagepng($thumb, "/assets/thumb/".$srcName, 3);
+        imagepng($thumb, "assets/thumb/".$srcName, 3);
     }
 
-    function saveFile($data){
+    function saveFile($data, $desc, Category $cat){
         if(!$data->getError() === UPLOAD_ERR_OK){
             $return_data['status']=0;
             $return_data['errmsg']="file upload failed";
             return $return_data;
         }
-        $imageFile = $data->file;
+        $imageFile = $data->file; //get the file from PSR-7 object
         $info = getimagesize($imageFile); //get info about file
-        print_r($info);
+        $ext = explode("/", $info['mime'])[1];//get the file extension
         $type = $this->checkFileType($imageFile, $info);
+
+        //create return data
         $return_data = array();
 
-        if(!$type){
+        if(!$type){ //if the file check failed, file has wrong type
             $return_data['status']=0;
             $return_data['errmsg']="Wrong file type";
             return $return_data;
         }
-        $ext = pathinfo($imageFile, PATHINFO_EXTENSION);
-        $filename = "art_img_".uniqid().".".$ext;
-        $target = "/assets/art/".$filename;
-        move_uploaded_file($imageFile,$target);
 
+        //create file name
+        $filename = "art_img_".uniqid().".".$ext;
+        $target = "assets/art/".$filename;
+        move_uploaded_file($imageFile,$target);
+        //TODO:refactor this, using exceptions
+
+        //get image data to create thumb
         switch($type) {
             case IMAGETYPE_GIF:
-                $img = imagecreatefromgif($imageFile);
+                $img = imagecreatefromgif($target);
                 break;
             case IMAGETYPE_JPEG:
-                $img = imagecreatefromjpeg($imageFile);
+                $img = imagecreatefromjpeg($target);
                 break;
             case IMAGETYPE_PNG:
-                $img = imagecreatefrompng($imageFile);
+                $img = imagecreatefrompng($target);
                 break;
             default:
                 $return_data['status']=0;
                 $return_data['errmsg']="Invalid image data";
                 break;
         }
-        if(!isset($img)) return $return_data;
+        if(!isset($img)) return $return_data; //conversion failed
         $this->createThumbnail($img, $filename, $info);
 
+        if(!isset($cat) || !isset($desc)){
+            $return_data['status']=0;
+            $return_data['errmsg']="Invalid form data";
+            return $return_data;
+        }
+        $this->repo->save(new Art($target, htmlspecialchars($desc),0,0,$cat));
         $return_data['status']=1;
         $return_data['file']=$filename;
         return $return_data;

@@ -35,15 +35,16 @@ $app->group('/admin', function () use ($app, $twig, $artRepo, $catRepo){//todo: 
             "categories" => $catRepo->findAll()
         )));
     });
-    $app->post('/upload', function(Request $req, Response $resp) use ($twig, $artRepo){
+    $app->post('/upload', function(Request $req, Response $resp) use ($twig, $artRepo, $catRepo){
         $uploadController = new AppBundle\controllers\UploadController($artRepo);
         $file = $req->getUploadedFiles(); //returns slim-specific thingy
         $data = $req->getParsedBody();
-        $ret = $uploadController->saveFile($file['img']);
+        $currCategory = $catRepo->findBy(array('name' => $data['cat']));
+        $ret = $uploadController->saveFile($file['img'], $data['desc'], $currCategory[0]);
         return $resp->getBody()->write(json_encode($ret));
     });
 })->add(function(Request $req, Response $resp, $next) use ($securityService){
-    if($securityService->checkAdmin()){
+    if($securityService->checkAdmin()){ //todo: fix session timeout
         return $resp = $next($req, $resp);
     }
     else{

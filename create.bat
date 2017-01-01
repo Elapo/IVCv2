@@ -1,1 +1,3 @@
-vendor/bin/doctrine orm:schema-tool=create
+vendor/bin/doctrine orm:schema-tool:create
+
+#don't put php in front of it...

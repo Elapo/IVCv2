@@ -12,14 +12,14 @@ use Doctrine\ORM\EntityManager;
 require_once "vendor/autoload.php";
 
 // Create a simple "default" Doctrine ORM configuration for Annotations
-$isDevMode = true;
-$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src/domain"), $isDevMode);
+$isDevMode = true;//todo: change
+$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__ . "/src/AppBundle/domain"), $isDevMode);
 
 // database configuration parameters
 $conn = array(
     'driver'   => 'pdo_mysql',
     'user'     => 'root',
-    'password' => '',
+    'password' => '9cnHadtZTjoGtzUPY8ge',
     'dbname'   => 'IVC-v2',
 );
 
