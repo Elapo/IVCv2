@@ -11,7 +11,6 @@ namespace AppBundle\repositories {
     {
         function save($art)
         {
-            echo "saving ".$art->getDescription();
             $this->getEntityManager()->persist($art);
             $this->getEntityManager()->flush(); //todo: find a more elegant place to flush to db
         }

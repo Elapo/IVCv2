@@ -7,7 +7,9 @@ $(document).ready(function () {
         e.preventDefault();
         var imagesToUpload = $('.uploadFormPart');
         imagesToUpload.each(function() {
+            var self = $(this);
             var fields = $(this).find('.inputField');
+            if(!fields[0].files[0]) return;
             var data = new FormData();
             data.append('img', fields[0].files[0]);
             data.append('desc', fields[1].value);
@@ -19,30 +21,36 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 data: data
-            });
-            ajaxRequest.done(function (response, textStatus, errorThrown) {
+            }).uploadProgress(function (e) {
+                if(e.lengthComputable){
+                    var perc = Math.round((e.loaded * 100) / e.total);
+                    self.find('#myBar').css('width', perc+"%");
+                }
+            }).done(function (response, textStatus, errorThrown) {
                 //console.log(response);
                 var responsedata = $.parseJSON(response);
                 if (responsedata.status == 1) {
-                    alert("upload completed");
-                    //console.log(responsedata.file);
-/*                    var imglink = "assets/art/".concat(responsedata.file);
-                    $("#uploadedim").attr("src", imglink);*/
+                    console.log("upload done");
+                    setTimeout(function () {
+                       self.fadeOut("slow", function () {
+                           self.remove();
+                        });
+                    }, 1000);
                 }
                 else {
-                    alert("fail");
-                    //console.log(responseData.err);
+                    self.appendChild('<div style="color: red;">Upload Failed: '+ responsedata.errmsg +'</div>');
                 }
             });
-             /*ajaxRequest.error(function () {
-                alert('error');
-             });*/
         });
     });
     $('body').on('change', '.imupload',function () {
         var tar =$(this).parent().find('.preview');
         readURL(this, tar);
         tar.css('visibility', 'visible')
+    });
+
+    $('body').on('click', '.deleteUpload', function () {
+        //get element & remove
     });
     // $('#imupload').change(function () {
     //     readURL(this);
@@ -60,7 +68,6 @@ function readURL(input, tar) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            console.log(tar);
             tar.attr('src', e.target.result);
             //console.log(e.target.result);
         };

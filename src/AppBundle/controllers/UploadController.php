@@ -56,8 +56,8 @@ class UploadController
         }
         $imageFile = $data->file; //get the file from PSR-7 object
         $info = getimagesize($imageFile); //get info about file
-        $ext = explode("/", $info['mime'])[1];//get the file extension
         $type = $this->checkFileType($imageFile, $info);
+        $ext = explode("/", $info['mime'])[1];//get the file extension
 
         //create return data
         $return_data = array();
@@ -73,6 +73,7 @@ class UploadController
         $target = "assets/art/".$filename;
         move_uploaded_file($imageFile,$target);
         //TODO:refactor this, using exceptions
+        //handle null of category
 
         //get image data to create thumb
         switch($type) {
