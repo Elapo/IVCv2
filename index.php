@@ -6,7 +6,6 @@
  * Time: 14:49
  */
 session_start();
-$_SESSION['pleb'] = "ayy";
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \Respect\Validation\Validator as v;
@@ -24,6 +23,8 @@ $twig->addGlobal('base_url', base_url());
 
 //init services
 $securityService = new AppBundle\services\SecurityService();
+$securityService->check_session();
+
 $APIHelper = new AppBundle\services\APIHelper();
 $mailService = new AppBundle\services\MailService();
 /**
@@ -54,6 +55,7 @@ $app->get('/', function (Request $req, Response $resp) use ($twig){
 require 'src/routes/contact.php';
 require 'src/routes/gallery.php';
 require 'src/routes/admin.php';
+require 'src/routes/api.php';
 
 $app->get('/test', function (Request $req, Response $resp) use ($twig, $catRepo){
     return $resp->getBody()->write(base_url());

@@ -38,7 +38,7 @@ $(document).ready(function () {
                     }, 1000);
                 }
                 else {
-                    self.appendChild('<div style="color: red;">Upload Failed: '+ responsedata.errmsg +'</div>');
+                    self.appendChild('<div style="color: red;">Upload Failed: '+ responsedata.errmsg +'</div>');//fixme
                 }
             });
         });
@@ -50,11 +50,8 @@ $(document).ready(function () {
     });
 
     $('body').on('click', '.deleteUpload', function () {
-        //get element & remove
+        //todo: get element & remove
     });
-    // $('#imupload').change(function () {
-    //     readURL(this);
-    // });
 
     $('#addUpload').on('click', function (e) {
         e.preventDefault();

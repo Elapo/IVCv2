@@ -22,9 +22,11 @@ $app->get('/work', function (Request $req, Response $resp) use ($twig){
 });
 
 $app->get('/gallery', function (Request $req, Response $resp) use ($twig){
-    //todo: get all images
+    //required: array of art +  in json format
     $twigVar = array(
-        "pageTitle" => "Gallery"
+        "pageTitle" => "Gallery",
+        "art" => array(),
+        "art_json" => ""
     );
     if(isset($_SESSION['user']) && $_SESSION['user']['isAdmin'])
         $twigVar['admin'] = true;
@@ -35,15 +37,13 @@ $app->get('/gallery', function (Request $req, Response $resp) use ($twig){
 $app->get('/gallery/{cat}', function (Request $req, Response $resp) use ($twig){
     $cat = $req->getAttribute("cat");
     $twigVar = array(
-        "pageTitle" => "Gallery"
+        "pageTitle" => "Gallery",
+        "art" => array(),
+        "art_json" => ""
     );
     if(isset($_SESSION['user']) && $_SESSION['user']['isAdmin'])
         $twigVar['admin'] = true;
 
     //todo: get all images for cat
     return $resp->getBody()->write($twig->render('gallery.html.twig', $twigVar));
-});
-
-$app->post('/gallery', function (Request $req, Response $resp) use ($artRepo){
-    //todo:do upload
 });

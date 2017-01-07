@@ -1,6 +1,8 @@
 $('document').ready(function(){
     var yt=$('#ytlinkimg');
     var da=$('#dalinkimg');
+    var inst=$('#instlinkimg');
+
     $('#ytlink').hover(function(){
         yt.fadeOut(0, function(){
             yt.attr("src", "assets/img/youtubelogored.png").fadeIn(0);
@@ -21,4 +23,13 @@ $('document').ready(function(){
         });
     });
 
+    $('#instlink').hover(function(){
+        inst.fadeOut(0, function(){
+            inst.attr("src", "assets/img/instagramlogocolor.png").fadeIn(0);
+        });
+    }, function(){
+        inst.fadeOut(0, function(){
+            inst.attr("src", "assets/img/instagramlogo.png").fadeIn(0);
+        });
+    });
 });

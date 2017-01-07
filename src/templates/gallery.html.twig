@@ -1,22 +1,61 @@
-<link rel="stylesheet" href="assets/css/gallery.css">
+{% include 'header.html.twig' %}
+<link rel="stylesheet" href="{{ base_url }}assets/css/gallery.css">
 <script src="https://rubaxa.github.io/Sortable/Sortable.js"></script>
-<script>
-    var imgs = <?=json_encode($files); ?>;
-    var desc = <?=json_encode($desc); ?>;
-</script>
-<?php
-    if($admin) echo '<script src="assets/js/editmode.js"></script>'?>
+{#<script>
+    var imgs = {}{{ base_url ~ imageLinks|raw }}; todo: replace with API call
+    var desc = {}{{ descriptions|raw }};
+</script>#}
+{% if admin %}
+    <script src="{{ base_url }}assets/js/editmode.js"></script>
+{%  endif %}
 <div class="container-fluid overlay">
     <div class="gallery-showcase">
-    <img src="assets/img/arrow.png" alt="arrow" class="arrow-left arrow" height="50">
-    <div class="gallery-selected">
-    <div class="gallery-selected-img"></div>
-    <p id="artdesc"></p>
+        <img src="{{ base_url }}assets/img/arrow.png" alt="arrow" class="arrow-left arrow" height="50">
+        <div class="gallery-selected">
+            <div class="gallery-selected-img"></div>
+            <p id="artdesc"></p>
+        </div>
+        <img src="{{ base_url }}assets/img/arrow.png" alt="arrow" class="arrow-right arrow" height="50">
     </div>
-    <img src="assets/img/arrow.png" alt="arrow" class="arrow-right arrow" height="50">
+</div>
+<div class="row content gallery-content list-group" id="imageList">
+    {# foreach image #}
+    {% for a in art %}
+        {% if not a.isVideo %}
+        <div class="col-sm-12 col-md-6 col-lg-3 draggable fixedheight">
+            <div class="img-container">
+                <figure>
+                    <img class="galleryimg ghost" src="{{ base_url ~ a.imageLink }}" alt="image" id="{{ loop.index }}">
+                </figure>
+        {% else %}
+        <div class="col-sm-12 col-md-6 col-lg-3 draggable fixedheight">
+            <div class="img-container">
+                <figure>
+                    <img class="galleryimg ghost" src="https://img.youtube.com/vi/{{ a.imageLink }}/hqdefault.jpg" alt="image" id="{{ loop.index }}">
+                </figure>
+        {% endif %}
+        {% if admin %}
+            <div class="btn-group-vertical editmode-btn hidden">
+                <button class="btn btn-success editimg" value="{{ a.id }}">Edit</button>
+                <button  class="btn btn-danger deleteimg" value="{{ a.id }}">Delete</button>
+            </div>
+        {% endif %}
+        </div>
     </div>
+    {% endfor %}
+{% if admin %}
+    <script>
+        Sortable.create(imageList,{animation:150, draggable:".draggable", ghostClass:".ghost"});
+    </script>
+    <div class="row">
+        <div class="checkbox col-md-12">
+            <label class="cb-label"><input type="checkbox" id="editmode">Edit mode</label>
+        </div>
     </div>
-    <div class="row content gallery-content list-group" id="imageList">
+{% endif %}
+<script src="{{ base_url }}assets/js/gallery.js"></script>
+{% include 'footer.html.twig' %}
+{#
 <?php
     $i = -1;
 foreach ($data as $image){
@@ -60,4 +99,4 @@ foreach ($data as $image){
 }?>
 <script src="assets/js/gallery.js"></script>
 <?php
-include("includes/templates/footer.php"); ?>
+include("includes/templates/footer.php"); ?>#}

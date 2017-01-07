@@ -1,5 +1,8 @@
+var imgs = {}, desc = {};
 $('document').ready(function() {
+    if (imgs)
     var src, currArt, maxID = imgs.length - 1;
+    
     var overlay = $(".overlay");
     var arrowL = $('.arrow-left');
     var arrowR = $('.arrow-right');
@@ -72,4 +75,8 @@ function changeHighlight(id, txt) {
         }
         txt.html(desc[id]);
     }).fadeIn(200);
+}
+
+function getImgData() {
+    
 }
