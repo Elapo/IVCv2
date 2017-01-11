@@ -21,12 +21,21 @@ $app->get('/work', function (Request $req, Response $resp) use ($twig){
     return $resp->getBody()->write($twig->render('work.html.twig', $twigVar));
 });
 
-$app->get('/gallery', function (Request $req, Response $resp) use ($twig){
+$app->get('/gallery', function (Request $req, Response $resp) use ($twig, $artRepo){
+    $art = $artRepo->findAll();
+
+    $imagelinks  = array_map(function($value){
+        return $value->getImageLink();
+    }, $art);
+    $descs  = array_map(function($value){
+        return $value->getDescription();
+    }, $art);
     //required: array of art +  in json format
     $twigVar = array(
         "pageTitle" => "Gallery",
-        "art" => array(),
-        "art_json" => ""
+        "art" => $art,
+        "imageLinks" => json_encode($art),
+        "descriptions" => json_encode($descs)
     );
     if(isset($_SESSION['user']) && $_SESSION['user']['isAdmin'])
         $twigVar['admin'] = true;

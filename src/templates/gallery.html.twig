@@ -1,10 +1,10 @@
 {% include 'header.html.twig' %}
 <link rel="stylesheet" href="{{ base_url }}assets/css/gallery.css">
 <script src="https://rubaxa.github.io/Sortable/Sortable.js"></script>
-{#<script>
-    var imgs = {}{{ base_url ~ imageLinks|raw }}; todo: replace with API call
-    var desc = {}{{ descriptions|raw }};
-</script>#}
+<script>
+    var imgs = {{ imageLinks|raw }}; /*todo: replace with API call*/
+    var desc = {{ descriptions|raw }};
+</script>
 {% if admin %}
     <script src="{{ base_url }}assets/js/editmode.js"></script>
 {%  endif %}
@@ -54,6 +54,7 @@
     </div>
 {% endif %}
 <script src="{{ base_url }}assets/js/gallery.js"></script>
+</div>
 {% include 'footer.html.twig' %}
 {#
 <?php
