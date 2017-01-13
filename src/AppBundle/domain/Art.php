@@ -115,7 +115,7 @@ namespace AppBundle\domain{
         /**
          * @return mixed
          */
-        public function getIsVideo()
+        public function isVideo()
         {
             return $this->isVideo;
         }

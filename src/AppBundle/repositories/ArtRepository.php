@@ -29,7 +29,7 @@ namespace AppBundle\repositories {
 
         function getArtByCategory($cat)
         {
-            $query = $this->getEntityManager()->createQuery('SELECT a FROM domain\Art a WHERE a.category = ?1');
+            $query = $this->getEntityManager()->createQuery('SELECT a, c FROM AppBundle\domain\Art a JOIN a.category c WHERE c.name=?1');
             $query->setParameter(1, $cat);
             return $query->getResult();
         }

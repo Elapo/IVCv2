@@ -25,13 +25,13 @@
         <div class="col-sm-12 col-md-6 col-lg-3 draggable fixedheight">
             <div class="img-container">
                 <figure>
-                    <img class="galleryimg ghost" src="{{ base_url ~ a.imageLink }}" alt="image" id="{{ loop.index }}">
+                    <img class="galleryimg ghost" src="{{ base_url ~ a.imageLink }}" alt="image" id="{{ loop.index-1 }}">
                 </figure>
         {% else %}
         <div class="col-sm-12 col-md-6 col-lg-3 draggable fixedheight">
             <div class="img-container">
                 <figure>
-                    <img class="galleryimg ghost" src="https://img.youtube.com/vi/{{ a.imageLink }}/hqdefault.jpg" alt="image" id="{{ loop.index }}">
+                    <img class="galleryimg ghost" src="https://img.youtube.com/vi/{{ a.imageLink }}/hqdefault.jpg" alt="image" id="{{ loop.index-1 }}">
                 </figure>
         {% endif %}
         {% if admin %}

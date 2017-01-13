@@ -24,9 +24,8 @@ $app->get('/work', function (Request $req, Response $resp) use ($twig){
 $app->get('/gallery', function (Request $req, Response $resp) use ($twig, $artRepo){
     $art = $artRepo->findAll();
 
-    $imagelinks  = array_map(function($value){
-        return $value->getImageLink();
-    }, $art);
+    $artInfo = createReducedArtArray($art);
+
     $descs  = array_map(function($value){
         return $value->getDescription();
     }, $art);
@@ -34,7 +33,7 @@ $app->get('/gallery', function (Request $req, Response $resp) use ($twig, $artRe
     $twigVar = array(
         "pageTitle" => "Gallery",
         "art" => $art,
-        "imageLinks" => json_encode($art),
+        "imageLinks" => json_encode($artInfo),
         "descriptions" => json_encode($descs)
     );
     if(isset($_SESSION['user']) && $_SESSION['user']['isAdmin'])
@@ -43,16 +42,38 @@ $app->get('/gallery', function (Request $req, Response $resp) use ($twig, $artRe
     return $resp->getBody()->write($twig->render('gallery.html.twig', $twigVar));
 });
 
-$app->get('/gallery/{cat}', function (Request $req, Response $resp) use ($twig){
+$app->get('/gallery/{cat}', function (Request $req, Response $resp) use ($twig, $artRepo){
     $cat = $req->getAttribute("cat");
+
+    $art = $artRepo->getArtByCategory($cat);
+    $artInfo = createReducedArtArray($art);
+    $descs  = array_map(function($value){
+        return $value->getDescription();
+    }, $art);
+
     $twigVar = array(
         "pageTitle" => "Gallery",
-        "art" => array(),
-        "art_json" => ""
+        "art" => $art,
+        "imageLinks" => json_encode($artInfo),
+        "descriptions" => json_encode($descs)
     );
     if(isset($_SESSION['user']) && $_SESSION['user']['isAdmin'])
         $twigVar['admin'] = true;
 
-    //todo: get all images for cat
     return $resp->getBody()->write($twig->render('gallery.html.twig', $twigVar));
 });
+
+function createReducedArtArray($art){
+    $artInfo = array();
+    $imagelinks  = array_map(function($value){
+        return $value->getImageLink();
+    }, $art);
+    $isVid  = array_map(function($value){
+        return $value->isVideo();
+    }, $art);
+    foreach ($imagelinks as $key=>$link){
+        array_push($artInfo, array("link"=> $imagelinks[$key], "isVideo"=>$isVid[$key] ? "1" : "0")); //js expects a string todo:change js so I can dump this abomination
+    }
+
+    return $artInfo;
+}

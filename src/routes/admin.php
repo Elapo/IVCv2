@@ -24,7 +24,7 @@ $app->post('/login', function (Request $req, Response $resp) use ($userRepo){
 $app->get('/logout', function (Request $req, Response $resp) use ($twig, $securityService) {
     session_unset();
     session_destroy();
-    return $resp->withStatus(302)->withHeader('location', '/Template/');//todo: change for production
+    return $resp->withStatus(302)->withHeader('location', '/ivc/');//todo: change for production
 });
 
 $app->group('/admin', function () use ($app, $twig, $artRepo, $catRepo){//todo: fix linking assets

@@ -1,4 +1,3 @@
-var imgs = {}, desc = {};
 $('document').ready(function() {
     if (imgs)
     var src, currArt, maxID = imgs.length - 1;
@@ -11,8 +10,9 @@ $('document').ready(function() {
     overlay.hide();
     $(".galleryimg").click(function() {
         overlay.fadeIn("fast");
-        currArt = $(this).attr('value');
+        currArt = $(this).attr('id');
         changeHighlight(currArt, descArea);
+        console.log(currArt);
     });
     overlay.click(function(e) {
         if (e.target != arrows[0] && e.target != arrows[1]) {
@@ -29,6 +29,7 @@ $('document').ready(function() {
             currArt++;
         }
         changeHighlight(currArt, descArea);
+        console.log(currArt);
     });
     arrowL.click(function() {
         if (currArt == 0) {
@@ -37,6 +38,7 @@ $('document').ready(function() {
             currArt--;
         }
         changeHighlight(currArt, descArea);
+        console.log(currArt);
     });
     overlay.on("swipeleft", function() {
         if (currArt == maxID) {
@@ -45,6 +47,7 @@ $('document').ready(function() {
             currArt++;
         }
         changeHighlight(currArt, descArea);
+        console.log(currArt);
     });
     overlay.on("swiperight", function() {
         if (currArt == 0) {
@@ -53,6 +56,7 @@ $('document').ready(function() {
             currArt--;
         }
         changeHighlight(currArt, descArea);
+        console.log(currArt);
     });
 });
 
@@ -60,7 +64,7 @@ function changeHighlight(id, txt) {
     $(".gallery-selected-img").fadeOut(200, function() {
         var w, h;
         $(this).empty();
-        if (imgs[id]['isVideo'] == 0) {
+        if (imgs[id].isVideo == 0) {
             $(this).append('<img src=' + imgs[id]['link'] + '>');
             $(".gallery-selected-img img").on('load', function() {
                 var w = $(this).width();
