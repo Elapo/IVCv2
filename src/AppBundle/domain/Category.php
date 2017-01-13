@@ -8,7 +8,7 @@
  */
 namespace AppBundle\domain {
     /** @Entity @Table(name="tblCategory") */
-    class Category
+    class Category implements \JsonSerializable
     {
         /** @Id @Column(type="integer") @GeneratedValue */
         private $id;
@@ -19,6 +19,14 @@ namespace AppBundle\domain {
         function __construct($name)
         {
             $this->name = $name;
+        }
+
+        function jsonSerialize()
+        {
+            return array(
+                "id" => $this->id,
+                "name" => $this->name
+            );
         }
 
         /**

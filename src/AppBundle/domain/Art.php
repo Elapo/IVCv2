@@ -6,10 +6,10 @@
  * Date: 22/12/2016
  * Time: 14:25
  */
-namespace AppBundle\domain {
+namespace AppBundle\domain{
     /** @Entity(repositoryClass="AppBundle\repositories\ArtRepository")
      * @Table(name="tblArt") */
-    class Art
+    class Art implements \JsonSerializable
     {
         /** @Id @Column(type="integer") @GeneratedValue */
         private $id;
@@ -41,6 +41,19 @@ namespace AppBundle\domain {
             $this->isVideo = $isVideo;
             $this->isPromo = $isPromo;
             $this->category = $category;
+        }
+
+        function jsonSerialize()
+        {
+            return array(
+                "id" => $this->id,
+                "imageLink" => $this->imageLink,
+                "description" => $this->description,
+                "date" => $this->date,
+                "isVideo" => $this->isVideo,
+                "isPromo" => $this->isPromo,
+                "category"=> $this->category->getName()
+            );
         }
 
         /**

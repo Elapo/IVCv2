@@ -44,7 +44,7 @@ $app->group('/admin', function () use ($app, $twig, $artRepo, $catRepo){//todo: 
         return $resp->getBody()->write(json_encode($ret));
     });
 })->add(function(Request $req, Response $resp, $next) use ($securityService){
-    if($securityService->checkAdmin()){ //todo: fix session timeout
+    if($securityService->checkAdmin()){
         return $resp = $next($req, $resp);
     }
     else{

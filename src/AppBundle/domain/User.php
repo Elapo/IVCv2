@@ -9,7 +9,7 @@
 namespace AppBundle\domain{
     /** @Entity(repositoryClass="AppBundle\repositories\UserRepository")
      * @Table(name="tblUser") */
-    class User
+    class User implements \JsonSerializable
     {
         /** @Id @Column(type="integer") @GeneratedValue */
         private $id;
@@ -28,6 +28,16 @@ namespace AppBundle\domain{
             $this->username = $username;
             $this->email = $email;
             $this->password = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        function jsonSerialize()
+        {
+            return array(
+                "id" => $this->id,
+                "username" => $this->username,
+                "email" => $this->email,
+                "password" => $this->password
+            );
         }
 
         /**
