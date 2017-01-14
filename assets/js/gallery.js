@@ -80,7 +80,3 @@ function changeHighlight(id, txt) {
         txt.html(desc[id]);
     }).fadeIn(200);
 }
-
-function getImgData() {
-    
-}
