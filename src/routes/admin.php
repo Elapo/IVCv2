@@ -43,6 +43,9 @@ $app->group('/admin', function () use ($app, $twig, $artRepo, $catRepo){//todo: 
         $ret = $uploadController->saveFile($file['img'], $data['desc'], $currCategory[0]);
         return $resp->getBody()->write(json_encode($ret));
     });
+    $app->post('/uploadvideo', function (){
+
+    });
 })->add(function(Request $req, Response $resp, $next) use ($securityService){
     if($securityService->checkAdmin()){
         return $resp = $next($req, $resp);

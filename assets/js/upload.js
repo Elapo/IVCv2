@@ -3,6 +3,10 @@ $(document).ready(function () {
     var cnt = 0;
     var upload = $('#imgupload');
     var formPart = $('.uploadThis').clone();
+    var body = $('body');
+    var fileInput = $('.imupload');
+    var videoInput = '<input type="text" class="videoLink">';
+
     upload.submit(function (e) {
         e.preventDefault();
         var imagesToUpload = $('.uploadFormPart');
@@ -43,13 +47,13 @@ $(document).ready(function () {
             });
         });
     });
-    $('body').on('change', '.imupload',function () {
+    body.on('change', '.imupload',function () {
         var tar =$(this).parent().find('.preview');
         readURL(this, tar);
         tar.css('visibility', 'visible')
     });
 
-    $('body').on('click', '.deleteUpload', function () {
+    body.on('click', '.deleteUpload', function () {
         //todo: get element & remove
     });
 
@@ -58,6 +62,18 @@ $(document).ready(function () {
         formPart.removeClass('uploadThis').attr('id', 'formPart' + cnt++).appendTo('#multiform');
         $("html, body").animate({ scrollTop: $(document).height() }, "fast");
         formPart = formPart.clone();
+    });
+    body.on('click','.removeUpload', function () {
+        $(this).parent().remove();
+    });
+
+    body.on('change', '.videoCB', function () {
+        console.log("changing input");
+
+        var upload = $(this).parent().parent().find('.imupload');
+        console.log(upload);
+        if(upload) upload.replaceWith(videoInput);
+        else $(this).parent().parent().find('.videoLink').replaceWith(fileInput);
     });
 });
 function readURL(input, tar) {
