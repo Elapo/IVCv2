@@ -51,6 +51,7 @@ $app->group('/admin', function () use ($app, $twig, $artRepo, $catRepo){//todo: 
         return $resp = $next($req, $resp);
     }
     else{
+        $arr = [[1,2,3],[1,2,3]];
         throw new \Slim\Exception\NotFoundException($req, $resp);
     }
 });

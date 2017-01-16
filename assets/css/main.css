@@ -293,6 +293,10 @@ figure {
     clear: both;
 }
 
+.videoLink{
+    width: 100%;
+}
+
 @media all and (max-width: 950px) {
     .side-spotlight {
         display: none;

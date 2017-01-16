@@ -5,21 +5,28 @@ $(document).ready(function () {
     var formPart = $('.uploadThis').clone();
     var body = $('body');
     var fileInput = $('.imupload');
-    var videoInput = '<input type="text" class="videoLink">';
+    var videoInput = '<label class="videoLink">Video Link: <input type="text"></label>';
 
     upload.submit(function (e) {
         e.preventDefault();
         var imagesToUpload = $('.uploadFormPart');
         imagesToUpload.each(function() {
+
+            //todo: check for videocb and change Formdata accordingly
+            //change upload url to uploadvideo
+            var uploadUrl = './upload';
+
             var self = $(this);
             var fields = $(this).find('.inputField');
-            if(!fields[0].files[0]) return;
+            if(!fields[0].files[0]) return; //check if file exists
+
             var data = new FormData();
             data.append('img', fields[0].files[0]);
             data.append('desc', fields[1].value);
             data.append('cat', fields[2].value);
+
             ajaxRequest = $.ajax({
-                url: './upload',
+                url: uploadUrl,
                 type: 'POST',
                 cache: false,
                 contentType: false,
@@ -31,7 +38,6 @@ $(document).ready(function () {
                     self.find('#myBar').css('width', perc+"%");
                 }
             }).done(function (response, textStatus, errorThrown) {
-                //console.log(response);
                 var responsedata = $.parseJSON(response);
                 if (responsedata.status == 1) {
                     console.log("upload done");
@@ -53,10 +59,6 @@ $(document).ready(function () {
         tar.css('visibility', 'visible')
     });
 
-    body.on('click', '.deleteUpload', function () {
-        //todo: get element & remove
-    });
-
     $('#addUpload').on('click', function (e) {
         e.preventDefault();
         formPart.removeClass('uploadThis').attr('id', 'formPart' + cnt++).appendTo('#multiform');
@@ -68,11 +70,11 @@ $(document).ready(function () {
     });
 
     body.on('change', '.videoCB', function () {
-        console.log("changing input");
+        console.log(fileInput);
 
         var upload = $(this).parent().parent().find('.imupload');
-        console.log(upload);
-        if(upload) upload.replaceWith(videoInput);
+        debugger;
+        if(upload.length > 0) upload.replaceWith(videoInput);
         else $(this).parent().parent().find('.videoLink').replaceWith(fileInput);
     });
 });
