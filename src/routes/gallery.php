@@ -8,12 +8,14 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-$app->get('/work', function (Request $req, Response $resp) use ($twig){
+$app->get('/work', function (Request $req, Response $resp) use ($twig, $artRepo){
+    $promo = $artRepo->getPromo();
+
     $twigVar = array(
         "pageTitle" => "Work",
-        "spotlightL" => "",
-        "spotlightC" => "",
-        "spotlightR" => ""
+        "spotlightL" => $promo[0]->getImageLink(),
+        "spotlightC" => $promo[1]->getImageLink(),
+        "spotlightR" => $promo[2]->getImageLink()
     );
     if(isset($_SESSION['user']) && $_SESSION['user']['isAdmin'])
         $twigVar['admin'] = true;

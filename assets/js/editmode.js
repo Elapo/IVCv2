@@ -18,4 +18,6 @@ $('document').ready(function () {
         var val = $(this).val();
         window.location="includes/editform.php?img="+val;
     });
+
+    
 });

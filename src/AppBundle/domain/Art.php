@@ -26,8 +26,11 @@ namespace AppBundle\domain{
         /** @Column(type="boolean") */
         private $isVideo;
 
-        /** @Column(type="boolean") */
+        /** @Column(type="integer") */
         private $isPromo;
+
+        /** @Column(type="integer") */
+        private $sortId;
 
         /** @ManyToOne(targetEntity="Category") */
         private $category;

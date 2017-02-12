@@ -33,5 +33,10 @@ namespace AppBundle\repositories {
             $query->setParameter(1, $cat);
             return $query->getResult();
         }
+
+        function getPromo(){
+            $query = $this->getEntityManager()->createQuery('SELECT a FROM AppBundle\domain\Art a WHERE a.isPromo > 0 ORDER BY a.isPromo');
+            return $query->getResult();
+        }
     }
 }
