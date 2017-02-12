@@ -66,7 +66,7 @@ $app->get('/gallery/{cat}', function (Request $req, Response $resp) use ($twig, 
 function createReducedArtArray($art){
     $artInfo = array();
     $imagelinks  = array_map(function($value){
-        return base_url().$value->getImageLink();
+        return base_url()."/assets/art/".$value->getImageLink();
     }, $art);
     $isVid  = array_map(function($value){
         return $value->isVideo();

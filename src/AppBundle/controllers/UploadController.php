@@ -99,7 +99,7 @@ class UploadController
             $return_data['errmsg']="Invalid form data";
             return $return_data;
         }
-        $this->repo->save(new Art($target, htmlspecialchars($desc),0,0,$cat));
+        $this->repo->save(new Art($filename, htmlspecialchars($desc),0,0,$cat));
         $return_data['status']=1;
         $return_data['file']=$filename;
         return $return_data;
