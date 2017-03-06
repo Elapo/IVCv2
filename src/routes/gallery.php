@@ -9,13 +9,14 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/work', function (Request $req, Response $resp) use ($twig, $artRepo){
+    $promo = ["","",""];
     $promo = $artRepo->getPromo();
 
     $twigVar = array(
         "pageTitle" => "Work",
-        "spotlightL" => $promo[0]->getImageLink(),
-        "spotlightC" => $promo[1]->getImageLink(),
-        "spotlightR" => $promo[2]->getImageLink()
+        "spotlightL" => isset($promo[0]) ? $promo[0]->getImageLink() : "",
+        "spotlightC" => isset($promo[1]) ? $promo[1]->getImageLink() : "",
+        "spotlightR" => isset($promo[2]) ? $promo[2]->getImageLink() : ""
     );
     if(isset($_SESSION['user']) && $_SESSION['user']['isAdmin'])
         $twigVar['admin'] = true;
@@ -27,10 +28,13 @@ $app->get('/gallery', function (Request $req, Response $resp) use ($twig, $artRe
     $art = $artRepo->findAll();
 
     $artInfo = createReducedArtArray($art);
+    $artInfo = array_reverse($artInfo);
 
     $descs  = array_map(function($value){
         return $value->getDescription();
     }, $art);
+    $descs = array_reverse($descs);
+
     //required: array of art +  in json format
     $twigVar = array(
         "pageTitle" => "Gallery",
@@ -48,10 +52,14 @@ $app->get('/gallery/{cat}', function (Request $req, Response $resp) use ($twig, 
     $cat = $req->getAttribute("cat");
 
     $art = $artRepo->getArtByCategory($cat);
+
     $artInfo = createReducedArtArray($art);
+    $artInfo = array_reverse($artInfo);
+
     $descs  = array_map(function($value){
         return $value->getDescription();
     }, $art);
+    $descs = array_reverse($descs);
 
     $twigVar = array(
         "pageTitle" => "Gallery",
